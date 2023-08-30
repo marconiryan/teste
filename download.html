@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download</title>
+</head>
+
+<body>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+$(document).ready(function () {
+    const blobUrl = './teste.png'; // Nome do arquivo na pasta
+    $.ajax({
+        url: blobUrl,
+        method: 'GET',
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function (blob) {
+            const filename = 'teste.png'; // Nome do arquivo
+            const a = $('<a>')
+                .attr('href', window.URL.createObjectURL(blob))
+                .attr('download', filename)
+                .css('display', 'none');
+            $('body').append(a);
+            a[0].click();
+            a.remove();
+        },
+        error: function (error) {
+            console.error('Error downloading the Blob archive:', error);
+        }
+    });
+});
+
+
+
+</script>
+
+
+</html>
